@@ -19,7 +19,7 @@ class Viking(Soldier):
     def receiveDamage(self, damage):
         self.health = self.health - damage
 
-        if self.health <= 0:
+        if self.health > 0:
             return "{} has received {} points of damage".format(self.name, damage)
         
         else:
@@ -35,7 +35,7 @@ class Saxon(Soldier):
     def receiveDamage(self, damage):
         self.health = self.health - damage
 
-        if self.health <= 0:
+        if self.health > 0:
             return "A Saxon has received {} points of damage".format(damage)
         
         else:
@@ -58,19 +58,21 @@ class War():
         saxon = random.choice(self.saxonArmy)
         viking = random.choice(self.vikingArmy)
         s_damage = saxon.receiveDamage(viking.strength)
-        if saxon.health == 0:
+        if saxon.health <= 0:
             self.saxonArmy.remove(saxon)
         else:
-            return s_damage
+            pass
+        return s_damage
         
     def saxonAttack(self):
         viking = random.choice(self.vikingArmy)
         saxon = random.choice(self.saxonArmy)
         v_damage = viking.receiveDamage(saxon.strength)
-        if viking.health == 0:
+        if viking.health <= 0:
             self.vikingArmy.remove(viking)
         else:
-            return v_damage
+            pass
+        return v_damage
 
     def showStatus(self):
         if len(self.saxonArmy) == 0:
